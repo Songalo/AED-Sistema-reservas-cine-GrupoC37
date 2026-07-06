@@ -1,3 +1,17 @@
+from os import system
+from time import sleep
+from msvcrt import getch
+
+def limpiar() :
+    system('cls')
+
+def espera_de_carga() :
+    sleep(0.5)
+
+def esperar_al_usuario() :
+    print('Toque cualquier tecla para volver al Menú')
+    getch()
+
 peliculas = [
         {
             'id' : 1,
@@ -105,21 +119,21 @@ funciones = [
 salas = [
     {
         'id': 1,
-        'nombre' : 'Sala 1',
+        'nombre' : 'Sala 2D',
         'tipo' : '2D',
         'capacidad': 80,
         'precio' : 4000
     },
     {
         'id': 2,
-        'nombre' : 'Sala 2',
+        'nombre' : 'Sala 3D',
         'tipo' : '3D',
         'capacidad': 70,
         'precio' : 5000
     },
     {
         'id': 3,
-        'nombre' : 'Sala Premium',
+        'nombre' : 'Sala IMAX',
         'tipo' : 'IMAX',
         'capacidad': 50,
         'precio' : 7000
