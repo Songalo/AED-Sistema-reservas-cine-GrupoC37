@@ -1,5 +1,6 @@
 from datos import peliculas, funciones, salas, limpiar, espera_de_carga, esperar_al_usuario
 from estadisticas import mostrar_estadisticas
+from reservas import Iniciar_Reserva
 
 def mostrar_menu() :
     Menu = int(input("""
@@ -84,12 +85,15 @@ while salir == True :
             print('saliendo..')
             salir = False
         if Menu == 3 :
-            limpiar()
-            Reserva = Menu_Reservas()
-            limpiar()
-            Mostrar_Funciones(Reserva)
-            print('En desarrollo')
-            esperar_al_usuario()
+         limpiar()
+         Reserva = Menu_Reservas()
+         limpiar()
+         if Reserva == 1:
+             # Le pasamos Mostrar_Funciones para evitar importación circular más adelante
+             Iniciar_Reserva(Mostrar_Funciones) 
+             esperar_al_usuario()
+         elif Reserva == 2:
+             print("Volviendo al menú principal...")
     except ValueError :
         limpiar()
         print('Hubo un error, porfavor escoja una de las opciones del Menú')
