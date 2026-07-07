@@ -92,22 +92,25 @@ def recaudacion_total():
     total_recaudado = 0
 
     for reserva in reservas:
-        id_funcion = reserva["id_funcion"]
-        cantidad = reserva["cantidad"]
+        if "importe" in reserva:
+            total_recaudado = total_recaudado + reserva["importe"]
+        else:
+            id_funcion = reserva["id_funcion"]
+            cantidad = reserva["cantidad"]
 
-        for funcion in funciones:
-            if funcion["id"] == id_funcion:
-                id_sala = funcion["sala_id"]
+            for funcion in funciones:
+                if funcion["id"] == id_funcion:
+                    id_sala = funcion["sala_id"]
 
-                for sala in salas:
-                    if sala["id"] == id_sala:
-                        total_recaudado = (
-                            total_recaudado
-                            + cantidad * sala["precio"]
-                        )
-                        break
+                    for sala in salas:
+                        if sala["id"] == id_sala:
+                            total_recaudado = (
+                                total_recaudado
+                                + cantidad * sala["precio"]
+                            )
+                            break
 
-                break
+                    break
 
     print("Recaudación total: $", total_recaudado)
 
