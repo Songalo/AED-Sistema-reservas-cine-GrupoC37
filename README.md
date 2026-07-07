@@ -4,7 +4,7 @@
 
 - Gómez, Bruno Leopoldo Agustín
 - Tabernero, Francisco Ariel
-- López, Ailín
+- López, Aldana Ailín 
 - Gallardo Coronel, Gonzalo
 
 ## Comision 1.3
