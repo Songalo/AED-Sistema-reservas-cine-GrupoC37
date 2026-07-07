@@ -60,7 +60,7 @@ def Iniciar_Reserva(Mostrar_Funciones):
         )
         print(f"Asientos disponibles: {asientos_disponibles}")
 
-          if asientos_disponibles <= 0:
+        if asientos_disponibles <= 0:
             print("Lo sentimos, esta función se encuentra agotada.")
             return
 
