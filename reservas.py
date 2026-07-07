@@ -97,7 +97,6 @@ def Iniciar_Reserva(Mostrar_Funciones):
 
         confirmar = input("¿Confirmar reserva? (S/N): ").strip().upper()
 
-        confirmar = input("¿Confirmar reserva? (S/N): ").strip().upper()
 
         if confirmar == "S":
             nuevo_id = len(historial_reservas) + 1
