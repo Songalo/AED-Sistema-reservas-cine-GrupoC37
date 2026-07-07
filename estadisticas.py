@@ -71,6 +71,10 @@ def tratar_estadisticas(opcion):
     elif opcion == 5:
         print("Volviendo al menú principal...")
 
+    else:
+        print("La opción ingresada no es válida.")
+
+
 def menu_estadisticas():
     opcion = int(input("""
 ╔═══════════════════════════════════════════════════╗
@@ -83,14 +87,16 @@ def menu_estadisticas():
 ║   5. Volver al Menú Principal                     ║
 ╚═══════════════════════════════════════════════════╝
 Ingrese una opción: """))
+
     return opcion
+
 
 def mostrar_estadisticas():
     en_estadisticas = True
 
     while en_estadisticas:
         limpiar()
- 
+
         try:
             opcion = menu_estadisticas()
             limpiar()
@@ -100,6 +106,7 @@ def mostrar_estadisticas():
             else:
                 tratar_estadisticas(opcion)
                 esperar_al_usuario()
-        except ValueError :
-            print("Debe ingresar una opción del menú.")
+
+        except ValueError:
+            print("Debe ingresar una opción numérica.")
             esperar_al_usuario()
