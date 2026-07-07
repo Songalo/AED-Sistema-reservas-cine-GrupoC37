@@ -1,5 +1,5 @@
 from datos import peliculas, funciones, salas, limpiar, esperar_al_usuario
-from reservas import cargar_reservas_json
+from reservas import cargar_reservas_json, guardar_reserva_json
 
 
 def total_entradas_vendidas():
@@ -114,6 +114,14 @@ def recaudacion_total():
 
     print("Recaudación total: $", total_recaudado)
 
+def limpiar_estadisticas():
+    confirmar = input("¿Desea limpiar todas las estadísticas? (S/N): ").strip().upper()
+
+    if confirmar == "S":
+        guardar_reserva_json([])
+        print("Estadísticas reiniciadas.")
+    else:
+        print("Operación cancelada.")
 
 def tratar_estadisticas(opcion):
     if opcion == 1:
@@ -129,6 +137,9 @@ def tratar_estadisticas(opcion):
         recaudacion_total()
 
     elif opcion == 5:
+        limpiar_estadisticas()
+
+    elif opcion == 6:
         print("Volviendo al menú principal...")
 
     else:
@@ -144,8 +155,8 @@ def menu_estadisticas():
                 ║   2. Película más elegida                 ║
                 ║   3. Horario con mayor demanda            ║
                 ║   4. Recaudación total                    ║
-                ║   5. Volver al Menú Principal             ║
-                ║                                           ║
+                ║   5. Limpiar estadísticas                 ║
+                ║   6. Volver al Menú Principal             ║
                 ╚═══════════════════════════════════════════╝
                 Ingrese una opción: """))
 
