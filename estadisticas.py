@@ -137,16 +137,17 @@ def tratar_estadisticas(opcion):
 
 def menu_estadisticas():
     opcion = int(input("""
-╔═══════════════════════════════════════════════════╗
-║                   Estadísticas                    ║
-║═══════════════════════════════════════════════════║
-║   1. Total de entradas vendidas                   ║
-║   2. Película más elegida                         ║
-║   3. Horario con mayor demanda                    ║
-║   4. Recaudación total                            ║
-║   5. Volver al Menú Principal                     ║
-╚═══════════════════════════════════════════════════╝
-Ingrese una opción: """))
+                ╔═══════════════════════════════════════════╗
+                ║                Estadísticas               ║
+                ║═══════════════════════════════════════════║
+                ║   1. Total de entradas vendidas           ║
+                ║   2. Película más elegida                 ║
+                ║   3. Horario con mayor demanda            ║
+                ║   4. Recaudación total                    ║
+                ║   5. Volver al Menú Principal             ║
+                ║                                           ║
+                ╚═══════════════════════════════════════════╝
+                Ingrese una opción: """))
 
     return opcion
 
