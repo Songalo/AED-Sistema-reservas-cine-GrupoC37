@@ -60,19 +60,19 @@ def Iniciar_Reserva(Mostrar_Funciones):
         )
         print(f"Asientos disponibles: {asientos_disponibles}")
 
-  if asientos_disponibles <= 0:
-    print("Lo sentimos, esta función se encuentra agotada.")
-    return
+          if asientos_disponibles <= 0:
+            print("Lo sentimos, esta función se encuentra agotada.")
+            return
 
-print("\nPromociones disponibles:")
-print("3 entradas: 10% de descuento")
-print("4 entradas o más: 20% de descuento")
+        print("\nPromociones disponibles:")
+        print("3 entradas: 10% de descuento")
+        print("4 entradas o más: 20% de descuento")
 
-cantidad = int(input("\n¿Cuántas entradas desea reservar?: "))
+        cantidad = int(input("\n¿Cuántas entradas desea reservar?: "))
 
-if cantidad <= 0:
-    print("La cantidad debe ser mayor a 0.")
-    return
+        if cantidad <= 0:
+            print("La cantidad debe ser mayor a 0.")
+            return
 
         if cantidad > asientos_disponibles:
             print(
