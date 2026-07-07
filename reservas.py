@@ -1,9 +1,12 @@
 import json
+import os
 from datos import funciones, salas, peliculas
 
 
-RUTA_JSON = "reservas_cargadas.json"
-
+RUTA_JSON = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    "reservas_cargadas.json"
+)
 
 def cargar_reservas_json():
     try:
