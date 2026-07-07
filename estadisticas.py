@@ -2,71 +2,128 @@ from datos import peliculas, funciones, salas, limpiar, esperar_al_usuario
 from reservas import cargar_reservas_json
 
 
-def tratar_estadisticas(opcion):
-    
+def total_entradas_vendidas():
     reservas = cargar_reservas_json()
+    total = 0
 
-    # Cuenta si se encuentran reservas ya hechas anteriormente
+    for reserva in reservas:
+        total = total + reserva["cantidad"]
 
-    if len(reservas) == 0:
-        print("Todavía no hay reservas cargadas.")
-        return
+    print("Total de entradas vendidas:", total)
 
-    if opcion == 1:
-        total = 0
-        # Suma el total de reservas vendidas
-        for reserva in reservas:
-            total += reserva["cantidad"]
 
-        print(f"Total de entradas vendidas: {total}")
-        
-    elif opcion == 2:
-        contador_peliculas = {}
-        # Inicializa el contador
+def pelicula_mas_elegida():
+    reservas = cargar_reservas_json()
+    entradas_por_pelicula = {}
+
+    for reserva in reservas:
+        id_funcion = reserva["id_funcion"]
+        cantidad = reserva["cantidad"]
+
+        for funcion in funciones:
+            if funcion["id"] == id_funcion:
+                id_pelicula = funcion["pelicula_id"]
+
+                if id_pelicula in entradas_por_pelicula:
+                    entradas_por_pelicula[id_pelicula] = (
+                        entradas_por_pelicula[id_pelicula] + cantidad
+                    )
+                else:
+                    entradas_por_pelicula[id_pelicula] = cantidad
+
+                break
+
+    if len(entradas_por_pelicula) == 0:
+        print("No hay reservas cargadas.")
+    else:
+        id_mas_elegida = max(
+            entradas_por_pelicula,
+            key=entradas_por_pelicula.get
+        )
+
         for pelicula in peliculas:
-            contador_peliculas[pelicula["id"]] = 0
-        # Hace recuento de la cantidad de reservas para cada película
-        for reserva in reservas:
-            for funcion in funciones:
-                if funcion["id"] == reserva["id_funcion"]:
-                    contador_peliculas[funcion["pelicula_id"]] += reserva["cantidad"]
-                    break
-        # Halla la película con más cantidad de reservas
-        id_mas_elegida = max(contador_peliculas, key=contador_peliculas.get)
+            if pelicula["id"] == id_mas_elegida:
+                print("Película más elegida:", pelicula["pelicula"])
+                print(
+                    "Entradas vendidas:",
+                    entradas_por_pelicula[id_mas_elegida]
+                )
+                break
 
-        pelicula = peliculas[id_mas_elegida - 1]
-        # Imprime la película mas elegida con su total de entradas reservadas
-        print(f"Película más elegida: {pelicula['pelicula']}")
-        print(f"Entradas reservadas: {contador_peliculas[id_mas_elegida]}")
+
+def horario_mayor_demanda():
+    reservas = cargar_reservas_json()
+    entradas_por_horario = {}
+
+    for reserva in reservas:
+        id_funcion = reserva["id_funcion"]
+        cantidad = reserva["cantidad"]
+
+        for funcion in funciones:
+            if funcion["id"] == id_funcion:
+                horario = funcion["horario"]
+
+                if horario in entradas_por_horario:
+                    entradas_por_horario[horario] = (
+                        entradas_por_horario[horario] + cantidad
+                    )
+                else:
+                    entradas_por_horario[horario] = cantidad
+
+                break
+
+    if len(entradas_por_horario) == 0:
+        print("No hay reservas cargadas.")
+    else:
+        horario_mas_elegido = max(
+            entradas_por_horario,
+            key=entradas_por_horario.get
+        )
+
+        print("Horario con mayor demanda:", horario_mas_elegido)
+        print(
+            "Entradas vendidas:",
+            entradas_por_horario[horario_mas_elegido]
+        )
+
+
+def recaudacion_total():
+    reservas = cargar_reservas_json()
+    total_recaudado = 0
+
+    for reserva in reservas:
+        id_funcion = reserva["id_funcion"]
+        cantidad = reserva["cantidad"]
+
+        for funcion in funciones:
+            if funcion["id"] == id_funcion:
+                id_sala = funcion["sala_id"]
+
+                for sala in salas:
+                    if sala["id"] == id_sala:
+                        total_recaudado = (
+                            total_recaudado
+                            + cantidad * sala["precio"]
+                        )
+                        break
+
+                break
+
+    print("Recaudación total: $", total_recaudado)
+
+
+def tratar_estadisticas(opcion):
+    if opcion == 1:
+        total_entradas_vendidas()
+
+    elif opcion == 2:
+        pelicula_mas_elegida()
 
     elif opcion == 3:
-        contador_horarios = {}
-        # Inicializa contador
-        for funcion in funciones:
-            contador_horarios[funcion["horario"]] = 0
-        # Hace un recuento de las reservas en todos los horarios disponibles
-        for reserva in reservas:
-            for funcion in funciones:
-                if funcion["id"] == reserva["id_funcion"]:
-                    contador_horarios[funcion["horario"]] += reserva["cantidad"]
-                    break
-        # Halla el horario donde hubo mayor demanda
-        horario_mayor = max(contador_horarios, key=contador_horarios.get)
-        # Imprime el horario con mayor demandas y el total de entradas reservadas
-        print(f"Horario con mayor demanda: {horario_mayor}")
-        print(f"Entradas reservadas: {contador_horarios[horario_mayor]}")
+        horario_mayor_demanda()
 
     elif opcion == 4:
-        recaudacion = 0
-        
-        for reserva in reservas:
-            for funcion in funciones:
-                if funcion["id"] == reserva["id_funcion"]: # Halla la función que se reservó
-                    sala = salas[funcion["sala_id"] - 1] # Se halla la sala en donde se dará la función
-                    recaudacion += reserva["cantidad"] * sala["precio"] # Se multiplica la cantidad de reservas por el precio de la sala
-                    break
-        print(f"Recaudación total: ${recaudacion}")
-        # Imprime la recaudación total
+        recaudacion_total()
 
     elif opcion == 5:
         print("Volviendo al menú principal...")
