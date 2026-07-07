@@ -9,8 +9,6 @@ def cargar_reservas_json():
         with open(RUTA_JSON, 'r', encoding='utf-8') as archivo:
             return json.load(archivo)
     except (FileNotFoundError, json.JSONDecodeError):
-        # Si el archivo no existe todavía o está vacío, 
-        # devolvemos una lista vacía para que el programa no falle.
         return []
 
 def guardar_reserva_json(nuevas_reservas):
@@ -42,7 +40,7 @@ def Iniciar_Reserva(Mostrar_Funciones):
             print("❌ El ID de función ingresado no existe.")
             return
 
-        # Cargamos el historial del JSON de forma provisional para la prueba
+        # Cargamos el historial real del archivo JSON
         historial_reservas = cargar_reservas_json()
         asientos_ocupados = sum(r['cantidad'] for r in historial_reservas if r['id_funcion'] == id_funcion)
 
@@ -74,7 +72,20 @@ def Iniciar_Reserva(Mostrar_Funciones):
         confirmar = input("¿Confirmar reserva? (S/N): ").strip().upper()
         
         if confirmar == 'S':
-            print("\n[Simulación] Validación correcta. Falta implementar el guardado físico.")
+            # Generar ID autoincremental de forma dinámica basándonos en los datos del JSON
+            nuevo_id = len(historial_reservas) + 1 if historial_reservas else 1
+            
+            nueva_reserva = {
+                "id": nuevo_id,
+                "id_funcion": id_funcion,
+                "cantidad": cantidad
+            }
+            
+            # Guardado real y persistencia en el archivo
+            historial_reservas.append(nueva_reserva)
+            guardar_reserva_json(historial_reservas)
+            
+            print(f"\n¡🎉 Reserva #{nuevo_id} guardada con éxito en el archivo JSON!")
         else:
             print("\nReserva cancelada.")
             
