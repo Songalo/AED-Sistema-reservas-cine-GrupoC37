@@ -81,14 +81,14 @@ def Mostrar_Funciones(reserva=0):
 
 def Menu_Reservas():
     Reserva = int(input("""
-        ╔═══════════════════════════════════════════════════╗
-        ║                      Reservas                     ║
-        ║═══════════════════════════════════════════════════║
-        ║   1. Iniciar nueva reserva                        ║
-        ║   2. Volver al Menú Principal                     ║
-        ║                                                   ║
-        ╚═══════════════════════════════════════════════════╝
-        Ingrese una opción: """))
+                ╔═══════════════════════════════════════════════════╗
+                ║                     Reservas                      ║
+                ║═══════════════════════════════════════════════════║
+                ║   1. Iniciar nueva reserva                        ║
+                ║   2. Volver al Menú Principal                     ║
+                ║                                                   ║
+                ╚═══════════════════════════════════════════════════╝
+                Ingrese una opción: """))
 
     return Reserva
 
