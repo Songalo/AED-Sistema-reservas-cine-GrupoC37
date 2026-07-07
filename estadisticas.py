@@ -173,7 +173,7 @@ def mostrar_estadisticas():
             opcion = menu_estadisticas()
             limpiar()
 
-            if opcion == 5:
+            if opcion == 6:
                 en_estadisticas = False
             else:
                 tratar_estadisticas(opcion)
