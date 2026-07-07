@@ -105,7 +105,8 @@ def Iniciar_Reserva(Mostrar_Funciones):
             nueva_reserva = {
                 "id": nuevo_id,
                 "id_funcion": id_funcion,
-                "cantidad": cantidad
+                "cantidad": cantidad,
+                "importe": costo_total
             }
 
             historial_reservas.append(nueva_reserva)
