@@ -46,3 +46,7 @@ cd AED-Sistema-reservas-cine-GrupoC37
 ```bash
 python main.py
 ```
+
+## Uso de Inteligencia Artificial
+
+Durante el desarrollo del proyecto se utilizó ChatGPT como herramienta de apoyo. Su uso consistió en brindar explicaciones sobre conceptos de programación en Python, resolver dudas sobre la lógica de determinadas funciones, sugerir mejoras en la organización del código y colaborar en la detección y corrección de errores. Todas las decisiones finales, la implementación y la adaptación del código al proyecto fueron realizadas y revisadas por los integrantes del grupo.
