@@ -83,7 +83,19 @@ def Iniciar_Reserva(Mostrar_Funciones):
 
         costo_total = cantidad * sala_asociada["precio"]
 
+        if cantidad >= 4:
+            descuento = costo_total * 0.20
+            costo_total = costo_total - descuento
+            print("\nPromoción aplicada: 20% de descuento.")
+
+        elif cantidad == 3:
+            descuento = costo_total * 0.10
+            costo_total = costo_total - descuento
+            print("\nPromoción aplicada: 10% de descuento.")
+
         print(f"\nMonto total a abonar: ${costo_total}")
+
+        confirmar = input("¿Confirmar reserva? (S/N): ").strip().upper()
 
         confirmar = input("¿Confirmar reserva? (S/N): ").strip().upper()
 
