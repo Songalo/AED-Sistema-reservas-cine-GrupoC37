@@ -1,17 +1,72 @@
 from datos import peliculas, funciones, salas, limpiar, esperar_al_usuario
+from reservas import cargar_reservas_json
+
 
 def tratar_estadisticas(opcion):
-    if opcion == 1:
-        print("Total de entradas vendidas")
+    
+    reservas = cargar_reservas_json()
 
+    # Cuenta si se encuentran reservas ya hechas anteriormente
+
+    if len(reservas) == 0:
+        print("Todavía no hay reservas cargadas.")
+        return
+
+    if opcion == 1:
+        total = 0
+        # Suma el total de reservas vendidas
+        for reserva in reservas:
+            total += reserva["cantidad"]
+
+        print(f"Total de entradas vendidas: {total}")
+        
     elif opcion == 2:
-        print("Película más elegida")
+        contador_peliculas = {}
+        # Inicializa el contador
+        for pelicula in peliculas:
+            contador_peliculas[pelicula["id"]] = 0
+        # Hace recuento de la cantidad de reservas para cada película
+        for reserva in reservas:
+            for funcion in funciones:
+                if funcion["id"] == reserva["id_funcion"]:
+                    contador_peliculas[funcion["pelicula_id"]] += reserva["cantidad"]
+                    break
+        # Halla la película con más cantidad de reservas
+        id_mas_elegida = max(contador_peliculas, key=contador_peliculas.get)
+
+        pelicula = peliculas[id_mas_elegida - 1]
+        # Imprime la película mas elegida con su total de entradas reservadas
+        print(f"Película más elegida: {pelicula['pelicula']}")
+        print(f"Entradas reservadas: {contador_peliculas[id_mas_elegida]}")
 
     elif opcion == 3:
-        print("Horario con mayor demanda")
+        contador_horarios = {}
+        # Inicializa contador
+        for funcion in funciones:
+            contador_horarios[funcion["horario"]] = 0
+        # Hace un recuento de las reservas en todos los horarios disponibles
+        for reserva in reservas:
+            for funcion in funciones:
+                if funcion["id"] == reserva["id_funcion"]:
+                    contador_horarios[funcion["horario"]] += reserva["cantidad"]
+                    break
+        # Halla el horario donde hubo mayor demanda
+        horario_mayor = max(contador_horarios, key=contador_horarios.get)
+        # Imprime el horario con mayor demandas y el total de entradas reservadas
+        print(f"Horario con mayor demanda: {horario_mayor}")
+        print(f"Entradas reservadas: {contador_horarios[horario_mayor]}")
 
     elif opcion == 4:
-        print("Recaudación total")
+        recaudacion = 0
+        
+        for reserva in reservas:
+            for funcion in funciones:
+                if funcion["id"] == reserva["id_funcion"]: # Halla la función que se reservó
+                    sala = salas[funcion["sala_id"] - 1] # Se halla la sala en donde se dará la función
+                    recaudacion += reserva["cantidad"] * sala["precio"] # Se multiplica la cantidad de reservas por el precio de la sala
+                    break
+        print(f"Recaudación total: ${recaudacion}")
+        # Imprime la recaudación total
 
     elif opcion == 5:
         print("Volviendo al menú principal...")
