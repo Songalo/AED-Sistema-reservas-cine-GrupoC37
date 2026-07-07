@@ -34,13 +34,15 @@ El programa permite:
 ### Ejecución
 
 1. Clonar el repositorio:
-
+```bash
 git clone https://github.com/Songalo/AED-Sistema-reservas-cine-GrupoC37.git
+```
 
 2. Ingresar al directorio del proyecto:
-
+```bash
 cd AED-Sistema-reservas-cine-GrupoC37
-
+```
 3. Ejecutar el programa:
-
+```bash
 python main.py
+```
